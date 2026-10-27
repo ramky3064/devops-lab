@@ -1,0 +1,6 @@
+.git
+venv
+reports
+__pycache__
+.pytest_cache
+.scannerwork
