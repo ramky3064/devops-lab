@@ -1,17 +1,11 @@
 pipeline {
     agent any
+
     environment {
         IMAGE_NAME = 'taskapi'
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
         CONTAINER  = 'taskapi'
-    }
-
-    agent any
-    environment {
         PATH = "C:\\Users\\krish\\AppData\\Local\\Python\\pythoncore-3.15-64;C:\\Users\\krish\\AppData\\Local\\Python\\pythoncore-3.15-64\\Scripts;${env.PATH}"
-    }
-    stages {
-        ...
     }
 
     options {
@@ -27,6 +21,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat '''
+                    python --version
                     python -m venv venv
                     venv\\Scripts\\python -m pip install --upgrade pip
                     venv\\Scripts\\pip install -r requirements-dev.txt
@@ -48,9 +43,9 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                script { scannerHome = tool 'SonarScanner' }
+                script { env.SCANNER_HOME = tool 'SonarScanner' }
                 withSonarQubeEnv('sonarqube') {
-                    bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+                    bat "\"${env.SCANNER_HOME}\\bin\\sonar-scanner.bat\""
                 }
             }
         }
