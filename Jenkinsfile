@@ -81,7 +81,4 @@ pipeline {
         success { echo 'Pipeline succeeded' }
         failure { echo 'Pipeline failed' }
     }
-    environment {
-    PATH = "C:\\Program Files\\Python313;C:\\Program Files\\Python313\\Scripts;${env.PATH}"
-}
 }
