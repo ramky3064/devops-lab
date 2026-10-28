@@ -6,6 +6,14 @@ pipeline {
         CONTAINER  = 'taskapi'
     }
 
+    agent any
+    environment {
+        PATH = "C:\\Users\\krish\\AppData\\Local\\Python\\pythoncore-3.15-64;C:\\Users\\krish\\AppData\\Local\\Python\\pythoncore-3.15-64\\Scripts;${env.PATH}"
+    }
+    stages {
+        ...
+    }
+
     options {
         timestamps()
         timeout(time: 20, unit: 'MINUTES')
