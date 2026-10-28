@@ -1,4 +1,11 @@
 pipeline {
+    stage('Debug') {
+    steps {
+        bat 'echo %PATH%'
+        bat 'where python'
+        bat '"C:\\Program Files\\Python313\\python.exe" --version'
+    }
+}
     agent any
 
     environment {
